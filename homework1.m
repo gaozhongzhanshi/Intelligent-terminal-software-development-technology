@@ -1,3 +1,5 @@
+clc
+clear
 data = [1, 3;1, 4;2, 2;2, 3.8;3, 2;3.8, 3];
 labels = [0;0;0;1;1;1]; %自定义用于后续sigmod逻辑分类
 
@@ -8,10 +10,10 @@ iters = 1000;  %迭代次数
  b = 0;
  c = 0;
  for iter = 1:iters
-    z = a * X(:,1) + b * X(:,2) + c;
+    z = a * data(:,1) + b * data(:,2) + c;
     h = sigmoid(z);
-    a = a - (alpha/m) * sum((h - labels) .* X(:,1));
-    b = b - (alpha/m) * sum((h - labels) .* X(:,2));
+    a = a - (alpha/m) * sum((h - labels) .* data(:,1));
+    b = b - (alpha/m) * sum((h - labels) .* data(:,2));
     c = c - (alpha/m) * sum(h - labels);
     J = loss(a, b, c, data, labels);
     if J < 0.1
